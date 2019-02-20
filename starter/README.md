@@ -1,10 +1,10 @@
-# micronaut-examples
+# micronaut starter [![Build Status](https://travis-ci.org/daggerok/micronaut-examples.svg?branch=master)](https://travis-ci.org/daggerok/micronaut-examples) 
 
 _maven / windows_
 
-```bash
-./mvnw -f ./starter/pom.xml
-java -jar ./starter/target/*-all.jar
+```cmd
+mvnw -f .\starter\pom.xml
+java -jar .\starter\target\*-all.jar
 ```
 
 _gradle / unix_

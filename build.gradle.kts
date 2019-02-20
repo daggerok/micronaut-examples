@@ -1,5 +1,5 @@
 /*
- *gradle init --type=kotlin-application --dsl=kotlin --project-name=micronaut-example --package=com.github.daggerok
+ * gradle init --type=kotlin-application --dsl=kotlin --project-name=micronaut-examples --package=com.github.daggerok
  */
 
 plugins {

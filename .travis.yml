@@ -1,0 +1,45 @@
+language: java
+jdk: openjdk8
+node_js: lts/*
+addons:
+  apt:
+    packages:
+      - bash
+install: true
+script:
+  - export root=$(pwd)
+  #
+  # build gradle and maven
+  - ./gradlew >/dev/null
+  - ./mvnw >/dev/null
+  #
+  # test starter project
+  - export project=starter
+  # gradle
+  - mv -f ./${project}/build/install/${project} ./${project}/build/
+  - bash ./${project}/build/${project}/bin/${project}
+  # maven
+  - java -jar ./${project}/target/*-all.jar
+cache:
+  packages: true
+  npm: true
+  pip: true
+  directories:
+    - docs/node_modules
+    - ~/.gradle
+    - ~/.m2
+env:
+  global:
+    secure: j6XfhbqJHIgNL2Vq6GeZim0ZSvOt91x/4V8LVDolyNwTZRQF7Lof03yBusS4q6fVOa4B6fnTWRTXcUL3vry1BSyHJE8DK6pipSDhg9u4dTS2ORTqJO3+J2CxEawvQXkE6jO9x7D7QV0LEapraNTGqVTn0+RDtPQ46E6EySVqGTjx3JiTwCRqLhQ86LPbxYILo4Zlxj1G++jzrsE0ZxVWQhawR0yOreJJqBCJ3TTMQFqgFyv8lxhKUZiLnKuOAhUtzeGfQRjuh+dktyN6dt1QIvDDd3q0CyoBiNYP+9mqPWsafkQTWJDkD2NpAMZJwyAEvrxqPPyyST+hZFA312v24gbDQ+efE5cnqfdXfBW1s3yx6a5Ji2CLoDKZZ89CFKgNnOXu7LI8ZJHn7tCEFCwny0gETgQWsGp6Xh7HsrGW9x/rvKMhO2NHKf6DJYIRXFaMSDyaxVskE1MlhA/qRVgPwngmKHccikmmAbO0QopdRFd9Wd8KkTyH8Syc1G1jYtSgrXih39JZzsUpBs3CZB0hjBk4IPoOpTqZRkMkn0uD3OI+jdk4PC98MrLxeOSrZYAGi8Wm1cn75Vvtaob/hhgb7LHsaTaownAcv3dqtqggKn15RiFs+TF318/i1QDJTRK/TgnENM6+ZH4M05kOyGnMUrCT+4WHH5m4uZ6FI5rajPI=
+before_deploy:
+  - cd ${root}/docs
+  - npm i
+  - npm run build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: docs/.vuepress/dist
+  github-token: $GITHUB_TOKEN # a token generated on github allowing travis to push code on you repository
+  keep-history: true
+  on:
+    branch: master
