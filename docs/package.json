@@ -13,7 +13,7 @@
     "kotlin-gradle-dsl"
   ],
   "author": "Maksim Kostromin https://gituhub.com/daggerok/",
-  "license": "MIR",
+  "license": "MIT",
   "devDependencies": {
     "cross-env": "5.2.0",
     "vuepress": "0.14.9"
